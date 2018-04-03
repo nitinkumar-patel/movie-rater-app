@@ -25,6 +25,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loading = false;
+    if(localStorage.getItem('token') && localStorage.getItem('account')){
+      this.global.me = JSON.parse(localStorage.getItem('account'));
+      this.router.navigate(['/home']);
+    }
   }
   onLogin() {
     this.loading = true;
@@ -33,7 +37,7 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         localStorage.setItem('token', response['token']);
         this.global.me = response['user'];
-        console.log('token', response['token']);
+        this.router.navigate(['/home']);
       },
       error => {
         this.loading = false;
@@ -43,8 +47,4 @@ export class LoginComponent implements OnInit {
     console.log(this.userLogin.value)
 
   }
-  // goToHome() {
-  //   this.router.navigate(['/home']);
-  // }
-
 }
