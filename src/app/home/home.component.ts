@@ -41,4 +41,11 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  onLogout(){
+    this.global.me = new User();
+    localStorage.removeItem('token');
+    localStorage.removeItem('account');
+    this.router.navigate(['/login']);
+  }
+
 }
