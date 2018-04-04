@@ -29,7 +29,17 @@ export class RegisterComponent implements OnInit {
 
   onRegister(){
     this.loading = true;
-
+    this.userService.registerUser(this.userRegister.value).subscribe(
+      response => {
+        this.loading = false;
+        console.log('response', response);
+        this.router.navigate(['/login']);
+      },
+      error => {
+        this.loading = false;
+        console.log('error', error);
+      }
+    );
   }
 
 }
