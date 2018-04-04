@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   account: User = new User();
   userSub: Subscription;
+  movies;
 
   constructor(private global: GlobalService, private router: Router, private movieService:MovieService) { }
 
@@ -32,8 +33,9 @@ export class HomeComponent implements OnInit {
   
   getMovies(){
     this.movieService.getMovie().subscribe(
-      movies => {
-        console.log('movies', movies);
+      response => {
+        this.movies = response;
+        console.log('response', response);
       },
       error =>{
         console.log('error', error);
